@@ -9,7 +9,12 @@ Provide Docker deployment.
 The image assumes config file in the container at: `/etc/nginx/conf.d/*.conf` so use the `-v` option to
 mount one from your host.
 
+```
+docker run -p 8000:8000 -v /path/to/nginx.vh.default.conf:/etc/nginx/conf.d/nginx.vh.default.conf harrykobe/ceph-s3-nginx
+```
 
+
+Example nginx.conf file:
 ```nginx
   server {
     listen     8000;
@@ -24,10 +29,4 @@ mount one from your host.
       proxy_set_header x-amz-date $s3_date;
     }
   }
-```
-
-
-```
-docker build -t ceph-s3-nginx .
-docker run -p 8000:8000 -v /path/to/nginx.vh.default.conf:/etc/nginx/conf.d/nginx.vh.default.conf ceph-s3-nginx
 ```
